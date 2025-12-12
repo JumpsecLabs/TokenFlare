@@ -1,0 +1,11 @@
+# TokenFlare Configuration File
+# WARNING: Contains secrets - do NOT commit to git
+
+[cloudflare]
+# Get these from CloudFlare Dashboard > My Profile > API Tokens
+api_key = YOUR_CLOUDFLARE_API_KEY_HERE
+account_id = YOUR_CLOUDFLARE_ACCOUNT_ID_HERE
+
+[deployment]
+# Worker name (will be <name>.<subdomain>.workers.dev)
+worker_name = your-worker-name

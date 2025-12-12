@@ -1,0 +1,9 @@
+node_modules/*
+.wrangler
+.env
+*.bak
+tokenflare.cfg
+certs/*.pem
+certs/*.key
+__pycache__/
+*.pyc
