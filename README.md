@@ -93,6 +93,8 @@ Many Thanks to:
 
 Unauthorised use against systems you do not own or have permission to test is illegal.
 
+Using Cloudflare's services to penetration test a third party might go against some of their T&C's. Don't write to us if your prod CF account was banned - consider yourself warned. 
+
 ## License
 
 See LICENSE file.
