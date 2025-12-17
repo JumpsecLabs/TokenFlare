@@ -39,7 +39,7 @@ DEBUGGING="true"
 CLIENT_TENANT = "common"
 # uncomment to customise where you send the user to after auth is complete
 FINAL_REDIR = "https://thecatapi.com"
-UNAUTH_REDIR = "https://labs.jumpsec.com"
+UNAUTH_REDIR = "https://example.com"
 
 # ---- Lure Settings ---
 # /verifyme?uuid=<uuid>   would be the default lure path if you don't change the below
