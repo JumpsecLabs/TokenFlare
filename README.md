@@ -2,6 +2,9 @@
 
 **Serverless AITM Phishing Simulation Framework for Entra ID / M365**
 
+<p align="center">
+ <img src="tokenflare_logo.png" width="400px" alt="TokenFlare" />
+</p>
 
 ## Features
 
