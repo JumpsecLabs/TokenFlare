@@ -5,6 +5,7 @@
 # Get these from CloudFlare Dashboard > My Profile > API Tokens
 api_key = YOUR_CLOUDFLARE_API_KEY_HERE
 account_id = YOUR_CLOUDFLARE_ACCOUNT_ID_HERE
+account_email = YOUR_CLOUDFLARE_EMAIL
 
 [deployment]
 # Worker name (will be <name>.<subdomain>.workers.dev)

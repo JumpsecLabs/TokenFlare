@@ -325,7 +325,7 @@ worker_name = your-worker-name
             config.add_section('deployment')
 
         # 1. API Key
-        print("\n[1/3] CloudFlare API Key")
+        print("\n[1/4] CloudFlare API Key")
         print("     Get this from CloudFlare Dashboard > My Profile > API Tokens")
         current_key = config.get('cloudflare', 'api_key', fallback='')
         if current_key and current_key != 'YOUR_CLOUDFLARE_API_KEY_HERE':
@@ -342,7 +342,7 @@ worker_name = your-worker-name
         print()
 
         # 2. Account ID
-        print("[2/3] CloudFlare Account ID")
+        print("[2/4] CloudFlare Account ID")
         print("     Get this from CloudFlare Dashboard > Workers & Pages")
         current_account = config.get('cloudflare', 'account_id', fallback='')
         if current_account and current_account != 'YOUR_CLOUDFLARE_ACCOUNT_ID_HERE':
@@ -357,9 +357,25 @@ worker_name = your-worker-name
         config.set('cloudflare', 'account_id', account_id)
         print()
 
+        # 3. Account Email
+        print("[3/4] CloudFlare Account Email")
+        print("     The email address associated with your CloudFlare account")
+        current_email = config.get('cloudflare', 'account_email', fallback='')
+        if current_email:
+            account_email = input(f"     Enter account email [{current_email}]: ").strip() or current_email
+        else:
+            account_email = input("     Enter account email: ").strip()
+
+        if not account_email:
+            print("     [!] Invalid account email")
+            return 1
+
+        config.set('cloudflare', 'account_email', account_email)
+        print()
+
         # Test API credentials and get account subdomain
         print("[*] Testing CloudFlare API credentials...")
-        success, result = test_cloudflare_api(api_key, account_id)
+        success, result = test_cloudflare_api(api_key, account_id, account_email)
 
         if not success:
             print(f"[!] API test failed: {result}")
@@ -379,8 +395,8 @@ worker_name = your-worker-name
 
         print()
 
-        # 3. Worker name
-        print("[3/3] Worker Name")
+        # 4. Worker name
+        print("[4/4] Worker Name")
         print(f"     Your worker will be deployed to: <worker-name>.{account_subdomain}.workers.dev")
         current_worker = config.get('deployment', 'worker_name', fallback='')
         if current_worker and current_worker != 'your-worker-name':
@@ -693,6 +709,7 @@ worker_name = your-worker-name
 
         api_key = cfg.get('cloudflare', 'api_key', fallback='')
         account_id = cfg.get('cloudflare', 'account_id', fallback='')
+        account_email = cfg.get('cloudflare', 'account_email', fallback='')
         account_subdomain = cfg.get('cloudflare', 'account_subdomain', fallback='')
         worker_name = cfg.get('deployment', 'worker_name', fallback='')
 
@@ -710,7 +727,8 @@ worker_name = your-worker-name
 
         # 4. Set environment for wrangler
         env = os.environ.copy()
-        env['CLOUDFLARE_API_TOKEN'] = api_key
+        env['CLOUDFLARE_API_KEY'] = api_key
+        env['CLOUDFLARE_EMAIL'] = account_email
         env['CLOUDFLARE_ACCOUNT_ID'] = account_id
 
         print(f"[*] Deploying worker '{worker_name}' to CloudFlare...")

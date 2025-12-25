@@ -156,7 +156,7 @@ def update_wrangler_field(file_path: Union[str, Path], field_name: str, value: s
         f.writelines(lines)
 
 
-def test_cloudflare_api(api_key: str, account_id: str) -> Tuple[bool, str]:
+def test_cloudflare_api(api_key: str, account_id: str, account_email: str = '') -> Tuple[bool, str]:
     """
     Test CloudFlare API credentials and get account subdomain
 
@@ -166,7 +166,8 @@ def test_cloudflare_api(api_key: str, account_id: str) -> Tuple[bool, str]:
         # Call CloudFlare API to get account details
         url = f'https://api.cloudflare.com/client/v4/accounts/{account_id}'
         headers = {
-            'Authorization': f'Bearer {api_key}',
+            'X-Auth-Email': account_email,
+            'X-Auth-Key': api_key,
             'Content-Type': 'application/json'
         }
 
